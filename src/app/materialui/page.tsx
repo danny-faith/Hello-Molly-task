@@ -1,6 +1,7 @@
 "use client";
-import { Button, Drawer, Slider } from "@mui/material";
-import { list } from "postcss";
+import { Button, Drawer, Icon, Slider } from "@mui/material";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+
 import React from "react";
 // CODE COPIED FROM MUI docs
 
@@ -37,7 +38,12 @@ export default function MaterialUI() {
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
-            {<p>hello</p>}
+            {
+              <p>
+                <Icon />
+                <AccessAlarmIcon />
+              </p>
+            }
           </Drawer>
         </React.Fragment>
       ))}
