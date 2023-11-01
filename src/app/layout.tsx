@@ -1,4 +1,4 @@
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import "./globals.css";
 import "@fontsource/roboto/300.css";
@@ -6,6 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Navigation } from "./components/Navigation";
+import StickyFooter from "./components/StickyFooter";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,10 +21,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CssBaseline />
-      <body id="__next">
+      <Box
+        component="body"
+        id="__next"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      >
         <Navigation />
         {children}
-      </body>
+        <StickyFooter />
+      </Box>
     </html>
   );
 }
