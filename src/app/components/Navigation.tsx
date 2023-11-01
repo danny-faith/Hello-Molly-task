@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Diversity2 } from "@mui/icons-material";
+import Diversity2 from "@mui/icons-material/Diversity2";
 
 const pages = ["Home", "About Us", "Services", "Contact Us", "Blog"];
 
