@@ -1,0 +1,88 @@
+{
+  "company": {
+    "name": "Tech Innovators Inc.",
+    "founded_year": 2005,
+    "industry": "Information Technology",
+    "CEO": {
+      "name": "Sarah Johnson",
+      "title": "CEO",
+      "email": "sarah.johnson@techinnovators.com",
+      "phone": "555-555-5555",
+      "direct_reports": [
+        {
+          "name": "Michael Davis",
+          "title": "CFO",
+          "email": "michael.davis@techinnovators.com",
+          "phone": "555-555-5556",
+          "direct_reports": [
+            {
+              "name": "Sophia Adams",
+              "title": "Finance Manager",
+              "email": "sophia.adams@techinnovators.com",
+              "phone": "555-555-5557",
+              "direct_reports": []
+            },
+            {
+              "name": "William Harris",
+              "title": "Financial Analyst",
+              "email": "william.harris@techinnovators.com",
+              "phone": "555-555-5558",
+              "direct_reports": []
+            },
+            {
+              "name": "Oliver Turner",
+              "title": "Accounting Manager",
+              "email": "oliver.turner@techinnovators.com",
+              "phone": "555-555-5559",
+              "direct_reports": []
+            }
+          ]
+        },
+        {
+          "name": "Robert Smith",
+          "title": "COO",
+          "email": "robert.smith@techinnovators.com",
+          "phone": "555-555-5560",
+          "direct_reports": [
+            {
+              "name": "Emily Wilson",
+              "title": "VP of Operations",
+              "email": "emily.wilson@techinnovators.com",
+              "phone": "555-555-5561",
+              "direct_reports": []
+            },
+            {
+              "name": "Daniel Brown",
+              "title": "Director of Production",
+              "email": "daniel.brown@techinnovators.com",
+              "phone": "555-555-5562",
+              "direct_reports": []
+            },
+            {
+              "name": "Sophie Turner",
+              "title": "Director of Logistics",
+              "email": "sophie.turner@techinnovators.com",
+              "phone": "555-555-5563",
+              "direct_reports": []
+            },
+            {
+              "name": "Olivia Lee",
+              "title": "VP of HR",
+              "email": "olivia.lee@techinnovators.com",
+              "phone": "555-555-5564",
+              "direct_reports": [
+                {
+                  "name": "Ethan Miller",
+                  "title": "HR Manager",
+                  "email": "ethan.miller@techinnovators.com",
+                  "phone": "555-555-5565",
+                  "direct_reports": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
