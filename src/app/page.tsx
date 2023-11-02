@@ -1,5 +1,8 @@
 import { Hero } from "./components/Hero";
 import hierarchy from "./hierarchy.json";
+import { CompanyHierarchy } from "./components/CompanyHierarchy";
+import { Box } from "@mui/material";
+import { Typography } from "@mui/joy";
 
 async function getHiearchyServerSide() {
   "use server";
@@ -12,9 +15,12 @@ export default async function Home() {
   console.log("hierarchy", hierarchy);
 
   return (
-    <div>
+    <Box>
       <Hero />
-      <pre>{JSON.stringify(hierarchy, null, 2)}</pre>
-    </div>
+      <Box py={5}>
+        <Typography>Home</Typography>
+      </Box>
+      {/* <pre>{JSON.stringify(hierarchy, null, 2)}</pre> */}
+    </Box>
   );
 }
