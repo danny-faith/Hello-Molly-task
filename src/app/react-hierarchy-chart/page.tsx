@@ -2,6 +2,7 @@
 import React from "react";
 import { INode, ReactHiererchyChart } from "react-hierarchy-chart";
 import { Employee } from "../components/Employee";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 interface custNode extends INode {
   name: string;
@@ -25,36 +26,6 @@ const nodes: custNode[] = [
         cssClass: "level2",
         position: "Marketing Manager",
         childs: [
-          {
-            name: "Eyal Matthews",
-            cssClass: "level3",
-            position: "Social Media",
-          },
-          {
-            name: "Adam Mark",
-            cssClass: "level3",
-            position: "Offline Marketing",
-          },
-          {
-            name: "Eyal Matthews",
-            cssClass: "level3",
-            position: "Social Media",
-          },
-          {
-            name: "Adam Mark",
-            cssClass: "level3",
-            position: "Offline Marketing",
-          },
-          {
-            name: "Eyal Matthews",
-            cssClass: "level3",
-            position: "Social Media",
-          },
-          {
-            name: "Adam Mark",
-            cssClass: "level3",
-            position: "Offline Marketing",
-          },
           {
             name: "Eyal Matthews",
             cssClass: "level3",
@@ -92,26 +63,6 @@ const nodes: custNode[] = [
             cssClass: "level3",
             position: "Operational Manager",
           },
-          {
-            name: "Ligia Opera",
-            cssClass: "level3",
-            position: "Supply Chain",
-          },
-          {
-            name: "Moran Perry",
-            cssClass: "level3",
-            position: "Operational Manager",
-          },
-          {
-            name: "Ligia Opera",
-            cssClass: "level3",
-            position: "Supply Chain",
-          },
-          {
-            name: "Moran Perry",
-            cssClass: "level3",
-            position: "Operational Manager",
-          },
         ],
       },
     ],
@@ -120,33 +71,16 @@ const nodes: custNode[] = [
 
 export default function ReactHierarchyChart() {
   return (
-    <React.Fragment>
-      <ReactHiererchyChart
-        nodes={nodes}
-        direction="vertical"
-        randerNode={(node: custNode) => {
-          return (
-            <div className="node-template">
-              <strong>{node.position} </strong>
-              <span>{node.name} </span>
-              <button
-                onClick={() => {
-                  alert(node.name);
-                }}
-              >
-                ok
-              </button>
-            </div>
-          );
-        }}
-      />
-      <ReactHiererchyChart
-        nodes={nodes}
-        direction="horizontal"
-        randerNode={(node: custNode) => {
-          return <Employee name={node.name} position={node.position as any} />;
-        }}
-      />
-    </React.Fragment>
+    <Grid container justifyContent="center">
+      <Grid xs={12} md={8} lg={8}>
+        <ReactHiererchyChart
+          nodes={nodes}
+          direction="vertical"
+          randerNode={(node: custNode) => (
+            <Employee name={node.name} position={node.position as any} />
+          )}
+        />
+      </Grid>
+    </Grid>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import OrgTree from "react-org-tree";
 import { Employee } from "../components/Employee";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 const data = {
   id: 0,
@@ -13,6 +14,30 @@ const data = {
         {
           id: 4,
           label: "后端工程师",
+        },
+        {
+          id: 5,
+          label: "前端工程师",
+        },
+        {
+          id: 6,
+          label: "运维工程师",
+        },
+        {
+          id: 5,
+          label: "前端工程师",
+        },
+        {
+          id: 6,
+          label: "运维工程师",
+        },
+        {
+          id: 5,
+          label: "前端工程师",
+        },
+        {
+          id: 6,
+          label: "运维工程师",
         },
         {
           id: 5,
@@ -37,18 +62,22 @@ const data = {
 
 export default function ReactOrgTree() {
   return (
-    <OrgTree
-      data={data}
-      horizontal={true}
-      collapsable={true}
-      // labelClassName={labelClassName}
-      expandAll={true}
-      renderContent={(data: { label: any }) => {
-        return <Employee name="vsfv" position="CEO" />;
-      }}
-      // onClick={(e, data) => {
-      //     //todo
-      // }}
-    ></OrgTree>
+    <Grid container justifyContent="center">
+      <Grid xs={12} md={8} lg={7} bgcolor={"blue"}>
+        <OrgTree
+          data={data}
+          horizontal={false}
+          collapsable={true}
+          // labelClassName={labelClassName}
+          expandAll={true}
+          renderContent={(data: { label: any }) => {
+            return <Employee name="vsfv" position="CEO" />;
+          }}
+          // onClick={(e, data) => {
+          //     //todo
+          // }}
+        ></OrgTree>
+      </Grid>
+    </Grid>
   );
 }
