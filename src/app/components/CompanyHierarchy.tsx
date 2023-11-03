@@ -2,10 +2,10 @@
 import { Tree, TreeNode } from "react-organizational-chart";
 import { Employee } from "./Employee";
 import { useTheme } from "@mui/material/styles";
-
 import { useMediaQuery } from "@mui/material";
 
-const CompanyHierarchy = () => {
+// Having to use default export here due to issue with Next dynamic imports
+export default function CompanyHierarchy() {
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -43,6 +43,4 @@ const CompanyHierarchy = () => {
       </TreeNode>
     </Tree>
   );
-};
-
-export { CompanyHierarchy };
+}
