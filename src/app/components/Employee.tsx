@@ -4,13 +4,27 @@ import Typography from "@mui/joy/Typography";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+// TODO incorporate into IHierarchyData type
 type Props = {
   name: string;
   position: Position;
+  callback: React.Dispatch<React.SetStateAction<boolean>>;
+  current: boolean;
+  showCollapseButton: boolean;
 };
 
-const Employee = ({ name, position }: Props) => {
+const Employee = ({
+  name,
+  position,
+  callback,
+  current,
+  showCollapseButton,
+}: Props) => {
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
+
+  const handleExpandClick = () => {
+    callback(!current);
+  };
 
   return (
     <Box sx={{ p: 1, maxWidth: 345, display: "inline-block" }}>
@@ -25,11 +39,13 @@ const Employee = ({ name, position }: Props) => {
       <Typography fontSize={9} textAlign="center" noWrap maxWidth={200}>
         {position}
       </Typography>
-      <Grid container justifyContent="center">
-        <IconButton aria-label="settings">
-          <ExpandMoreIcon fontSize="small" />
-        </IconButton>
-      </Grid>
+      {showCollapseButton && (
+        <Grid container justifyContent="center">
+          <IconButton onClick={handleExpandClick} aria-label="settings">
+            <ExpandMoreIcon fontSize="small" />
+          </IconButton>
+        </Grid>
+      )}
     </Box>
   );
 };
