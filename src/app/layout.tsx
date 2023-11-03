@@ -6,7 +6,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Navigation } from "./components/Navigation";
-import StickyFooter from "./components/StickyFooter";
+// import StickyFooter from "./components/StickyFooter";
+import ThemeRegistry from "./ThemeRegistry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,20 +21,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <CssBaseline />
-      <Box
-        component="body"
-        id="__next"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
-        <Navigation />
-        {children}
-        <StickyFooter />
-      </Box>
+      <ThemeRegistry options={{ key: "mui" }}>
+        <CssBaseline />
+        <Box
+          component="body"
+          id="__next"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+          }}
+        >
+          <Navigation />
+          {children}
+          {/* <StickyFooter /> */}
+        </Box>
+      </ThemeRegistry>
     </html>
   );
 }
