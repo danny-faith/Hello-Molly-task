@@ -1,5 +1,10 @@
 "use client";
-import OrgTree from "react-org-tree";
+import dynamic from "next/dynamic";
+// import OrgTree from "react-org-tree";
+const OrgTree = dynamic(() => import("react-org-tree"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 import { Employee } from "../components/Employee";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
@@ -64,7 +69,7 @@ export default function ReactOrgTree() {
   return (
     <Grid container justifyContent="center">
       <Grid xs={12} md={8} lg={7} bgcolor={"blue"}>
-        <OrgTree
+        {/* <OrgTree
           data={data}
           horizontal={false}
           collapsable={true}
@@ -76,7 +81,7 @@ export default function ReactOrgTree() {
           // onClick={(e, data) => {
           //     //todo
           // }}
-        ></OrgTree>
+        ></OrgTree> */}
       </Grid>
     </Grid>
   );
