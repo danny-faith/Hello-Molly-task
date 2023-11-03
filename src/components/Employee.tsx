@@ -16,7 +16,7 @@ const hoverStyle = {
 type Props = {
   name: string;
   position: Position;
-  callback: React.Dispatch<React.SetStateAction<boolean>>;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   current: boolean;
   showCollapseButton: boolean;
   active: boolean;
@@ -28,16 +28,26 @@ const Employee = ({
   name,
   position,
   id,
-  callback,
+  setVisible,
   current,
   showCollapseButton,
   active,
   onClick,
 }: Props) => {
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
+  const sxValues = {
+    p: 1,
+    maxWidth: 345,
+    display: "inline-block",
+    cursor: "pointer",
+    ...(active && activeStyle),
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  };
 
   const handleExpandClick = () => {
-    callback(!current);
+    setVisible(!current);
   };
 
   const handleOnClick = () => {
@@ -45,20 +55,7 @@ const Employee = ({
   };
 
   return (
-    <Paper
-      elevation={1}
-      onClick={onClick}
-      sx={{
-        p: 1,
-        maxWidth: 345,
-        display: "inline-block",
-        cursor: "pointer",
-        // ...activeStyle,
-        "&:hover": {
-          backgroundColor: theme.palette.secondary.main,
-        },
-      }}
-    >
+    <Paper elevation={1} onClick={handleOnClick} sx={sxValues}>
       <Grid container justifyContent="center">
         <Avatar sx={{ bgcolor: red[500] }} aria-label="Employee">
           {avatarIntial}
