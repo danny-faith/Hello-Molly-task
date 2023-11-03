@@ -8,15 +8,18 @@ import React from "react";
 const RenderTree = ({
   nodes,
   isVisible,
+  setSelected,
 }: {
   nodes: IHierarchyData;
   isVisible: boolean;
+  setSelected: any;
 }) => {
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
   const treeNodeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
   const showCollapseButton = Array.isArray(nodes.children)
     ? nodes.children.length > 0
     : false;
+  const isActive = nodes.id === "" ? true : false;
 
   return (
     <TreeNode
@@ -25,16 +28,24 @@ const RenderTree = ({
         <Employee
           position={nodes.position}
           name={nodes.name}
+          id={nodes.id}
           callback={setVisible}
           current={visible}
           showCollapseButton={showCollapseButton}
+          active={isActive}
+          onClick={setSelected}
         />
       }
       className={treeNodeClass}
     >
       {Array.isArray(nodes.children)
         ? nodes.children.map((node, i) => (
-            <RenderTree key={i} nodes={node} isVisible={visible} />
+            <RenderTree
+              key={i}
+              nodes={node}
+              isVisible={visible}
+              setSelected={setSelected}
+            />
           ))
         : null}
     </TreeNode>
@@ -42,7 +53,13 @@ const RenderTree = ({
 };
 
 // Having to use default export here due to issue with Next dynamic imports
-export default function CompanyHierarchy({ data }: { data: IHierarchyData }) {
+export default function CompanyHierarchy({
+  data,
+  setSelected,
+}: {
+  data: IHierarchyData;
+  setSelected: any;
+}) {
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -50,7 +67,7 @@ export default function CompanyHierarchy({ data }: { data: IHierarchyData }) {
 
   return (
     <Tree label="Company hierarchy">
-      {<RenderTree nodes={data} isVisible={true} />}
+      {<RenderTree nodes={data} isVisible={true} setSelected={setSelected} />}
     </Tree>
   );
 }

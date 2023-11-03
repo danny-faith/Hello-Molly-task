@@ -1,8 +1,16 @@
-import { Avatar, IconButton, Box } from "@mui/material";
+import { Avatar, IconButton, Box, Paper } from "@mui/material";
 import { red } from "@mui/material/colors";
 import Typography from "@mui/joy/Typography";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { theme } from "../../theme";
+
+const activeStyle = {
+  backgroundColor: theme.palette.primary.main,
+};
+const hoverStyle = {
+  backgroundColor: theme.palette.secondary.main,
+};
 
 // TODO incorporate into IHierarchyData type
 type Props = {
@@ -11,14 +19,20 @@ type Props = {
   callback: React.Dispatch<React.SetStateAction<boolean>>;
   current: boolean;
   showCollapseButton: boolean;
+  active: boolean;
+  onClick: any;
+  id: string;
 };
 
 const Employee = ({
   name,
   position,
+  id,
   callback,
   current,
   showCollapseButton,
+  active,
+  onClick,
 }: Props) => {
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
 
@@ -26,17 +40,41 @@ const Employee = ({
     callback(!current);
   };
 
+  const handleOnClick = () => {
+    onClick(id);
+  };
+
   return (
-    <Box sx={{ p: 1, maxWidth: 345, display: "inline-block" }}>
+    <Paper
+      elevation={1}
+      onClick={onClick}
+      sx={{
+        p: 1,
+        maxWidth: 345,
+        display: "inline-block",
+        cursor: "pointer",
+        // ...activeStyle,
+        "&:hover": {
+          backgroundColor: theme.palette.secondary.main,
+        },
+      }}
+    >
       <Grid container justifyContent="center">
         <Avatar sx={{ bgcolor: red[500] }} aria-label="Employee">
           {avatarIntial}
         </Avatar>
       </Grid>
-      <Typography fontSize={9} textAlign="center" noWrap maxWidth={200}>
+      <Typography
+        fontSize={14}
+        fontWeight={500}
+        textAlign="center"
+        noWrap
+        maxWidth={200}
+        mt={1}
+      >
         {name}
       </Typography>
-      <Typography fontSize={9} textAlign="center" noWrap maxWidth={200}>
+      <Typography fontSize={12} textAlign="center" noWrap maxWidth={200}>
         {position}
       </Typography>
       {showCollapseButton && (
@@ -46,7 +84,7 @@ const Employee = ({
           </IconButton>
         </Grid>
       )}
-    </Box>
+    </Paper>
   );
 };
 

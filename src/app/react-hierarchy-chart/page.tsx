@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { INode, ReactHiererchyChart } from "react-hierarchy-chart";
-import { Employee } from "../components/Employee";
+import { Employee } from "../../components/Employee";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 interface custNode extends INode {

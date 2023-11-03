@@ -1,17 +1,17 @@
 import dynamic from "next/dynamic";
-import { BreakPoint } from "../components/BreakPoint";
+import { BreakPoint } from "../../components/BreakPoint";
 const CompanyHierarchy = dynamic(
-  () => import("../components/CompanyHierarchy"),
+  () => import("../../components/CompanyHierarchy"),
   {
     loading: () => <p>Loading...</p>,
     ssr: false,
   }
 );
-import { Hero } from "../components/Hero";
+import { Hero } from "../../components/Hero";
 import hierarchy from "../hierarchy";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { TreeViewDemo } from "../components/TreeView";
+import { TreeViewDemo } from "../../components/TreeView";
 
 async function getHiearchyServerSide() {
   return hierarchy;
