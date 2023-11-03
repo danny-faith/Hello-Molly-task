@@ -22,7 +22,7 @@ const TreeViewDemo = ({ data }: { data: IHierarchyData }) => {
 
   return (
     <TreeView
-      aria-label="file system navigator"
+      aria-label="Company navigator"
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
