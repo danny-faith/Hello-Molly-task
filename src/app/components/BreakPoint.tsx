@@ -26,8 +26,8 @@ const BreakPoint = ({ children }: { children: React.ReactNode }) => {
   //   console.log(bgColours.sm);
   //   console.log("res", res);
   //   console.log("colour", bgColours[res as any]);
-
-  return <Box bgcolor={bgColours[res as any]}>{children}</Box>;
+  return "#fff";
+  // return <Box bgcolor={bgColours[res as any]}>{children}</Box>;
 };
 
 export { BreakPoint };
