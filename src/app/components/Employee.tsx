@@ -4,8 +4,6 @@ import Typography from "@mui/joy/Typography";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-type Position = "CEO" | "CTO" | "Director" | "Employee" | "Software engineer";
-
 type Props = {
   name: string;
   position: Position;
