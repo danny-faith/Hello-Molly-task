@@ -73,13 +73,13 @@ export default function ReactHierarchyChart() {
   return (
     <Grid container justifyContent="center">
       <Grid xs={12} md={8} lg={8}>
-        <ReactHiererchyChart
+        {/* <ReactHiererchyChart
           nodes={nodes}
           direction="vertical"
           randerNode={(node: custNode) => (
             <Employee name={node.name} position={node.position as any} />
           )}
-        />
+        /> */}
       </Grid>
     </Grid>
   );
