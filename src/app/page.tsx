@@ -1,6 +1,5 @@
 import { Hero } from "./components/Hero";
 import hierarchy from "./hierarchy.json";
-import { CompanyHierarchy } from "./components/CompanyHierarchy";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/joy";
 
