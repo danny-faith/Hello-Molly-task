@@ -1,88 +1,81 @@
 {
-  "company": {
-    "name": "Tech Innovators Inc.",
-    "founded_year": 2005,
-    "industry": "Information Technology",
-    "CEO": {
-      "name": "Sarah Johnson",
-      "title": "CEO",
-      "email": "sarah.johnson@techinnovators.com",
-      "phone": "555-555-5555",
-      "direct_reports": [
+  "name": "Sarah Johnson",
+  "position": "CEO",
+  "email": "sarah.johnson@hellomolly.com.au",
+  "id": "5555",
+  "children": [
+    {
+      "name": "Michael Davis",
+      "position": "CFO",
+      "email": "michael.davis@hellomolly.com.au",
+      "id": "5556",
+      "children": [
         {
-          "name": "Michael Davis",
-          "title": "CFO",
-          "email": "michael.davis@techinnovators.com",
-          "phone": "555-555-5556",
-          "direct_reports": [
-            {
-              "name": "Sophia Adams",
-              "title": "Finance Manager",
-              "email": "sophia.adams@techinnovators.com",
-              "phone": "555-555-5557",
-              "direct_reports": []
-            },
-            {
-              "name": "William Harris",
-              "title": "Financial Analyst",
-              "email": "william.harris@techinnovators.com",
-              "phone": "555-555-5558",
-              "direct_reports": []
-            },
-            {
-              "name": "Oliver Turner",
-              "title": "Accounting Manager",
-              "email": "oliver.turner@techinnovators.com",
-              "phone": "555-555-5559",
-              "direct_reports": []
-            }
-          ]
+          "name": "Sophia Adams",
+          "position": "Finance Manager",
+          "email": "sophia.adams@hellomolly.com.au",
+          "id": "5557",
+          "children": []
         },
         {
-          "name": "Robert Smith",
-          "title": "COO",
-          "email": "robert.smith@techinnovators.com",
-          "phone": "555-555-5560",
-          "direct_reports": [
+          "name": "William Harris",
+          "position": "Financial Analyst",
+          "email": "william.harris@hellomolly.com.au",
+          "id": "5558",
+          "children": []
+        },
+        {
+          "name": "Oliver Turner",
+          "position": "Accounting Manager",
+          "email": "oliver.turner@hellomolly.com.au",
+          "id": "5559",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Robert Smith",
+      "position": "COO",
+      "email": "robert.smith@hellomolly.com.au",
+      "id": "5560",
+      "children": [
+        {
+          "name": "Emily Wilson",
+          "position": "VP of Operations",
+          "email": "emily.wilson@hellomolly.com.au",
+          "id": "5561",
+          "children": []
+        },
+        {
+          "name": "Daniel Brown",
+          "position": "Director of Production",
+          "email": "daniel.brown@hellomolly.com.au",
+          "id": "5562",
+          "children": []
+        },
+        {
+          "name": "Sophie Turner",
+          "position": "Director of Logistics",
+          "email": "sophie.turner@hellomolly.com.au",
+          "id": "5563",
+          "children": []
+        },
+        {
+          "name": "Olivia Lee",
+          "position": "VP of HR",
+          "email": "olivia.lee@hellomolly.com.au",
+          "id": "5564",
+          "children": [
             {
-              "name": "Emily Wilson",
-              "title": "VP of Operations",
-              "email": "emily.wilson@techinnovators.com",
-              "phone": "555-555-5561",
-              "direct_reports": []
-            },
-            {
-              "name": "Daniel Brown",
-              "title": "Director of Production",
-              "email": "daniel.brown@techinnovators.com",
-              "phone": "555-555-5562",
-              "direct_reports": []
-            },
-            {
-              "name": "Sophie Turner",
-              "title": "Director of Logistics",
-              "email": "sophie.turner@techinnovators.com",
-              "phone": "555-555-5563",
-              "direct_reports": []
-            },
-            {
-              "name": "Olivia Lee",
-              "title": "VP of HR",
-              "email": "olivia.lee@techinnovators.com",
-              "phone": "555-555-5564",
-              "direct_reports": [
-                {
-                  "name": "Ethan Miller",
-                  "title": "HR Manager",
-                  "email": "ethan.miller@techinnovators.com",
-                  "phone": "555-555-5565",
-                  "direct_reports": []
-                }
-              ]
+              "name": "Ethan Miller",
+              "position": "HR Manager",
+              "email": "ethan.miller@hellomolly.com.au",
+              "id": "5565",
+              "children": []
             }
           ]
         }
       ]
     }
-  }
+  ]
 }

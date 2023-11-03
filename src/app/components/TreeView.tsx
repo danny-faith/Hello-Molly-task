@@ -6,7 +6,15 @@ import { TreeView } from "@mui/x-tree-view/TreeView";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material";
 
-const TreeViewDemo = () => {
+const renderTree = (nodes: IHierarchyData) => (
+  <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
+    {Array.isArray(nodes.children)
+      ? nodes.children.map((node) => renderTree(node))
+      : null}
+  </TreeItem>
+);
+
+const TreeViewDemo = ({ data }: { data: IHierarchyData }) => {
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -18,15 +26,7 @@ const TreeViewDemo = () => {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      <TreeItem nodeId="1" label="Applications">
-        <TreeItem nodeId="2" label="Calendar" />
-      </TreeItem>
-      <TreeItem nodeId="5" label="Documents">
-        <TreeItem nodeId="10" label="OSS" />
-        <TreeItem nodeId="6" label="MUI">
-          <TreeItem nodeId="8" label="index.js" />
-        </TreeItem>
-      </TreeItem>
+      {renderTree(data)}
     </TreeView>
   );
 };

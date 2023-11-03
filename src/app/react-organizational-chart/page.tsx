@@ -14,13 +14,11 @@ async function getHiearchyServerSide() {
 export default async function ReactOrganizationalChart() {
   const hierarchy = await getHiearchyServerSide();
 
-  console.log("hierarchy", hierarchy);
-
   return (
     <Box>
       <Hero />
       <BreakPoint>
-        <TreeViewDemo />
+        <TreeViewDemo data={hierarchy} />
         <Grid container justifyContent="center">
           <Grid xs={12} md={8} lg={12}>
             <Box py={5}>
