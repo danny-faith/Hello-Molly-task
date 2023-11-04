@@ -33,6 +33,14 @@ const Hero = ({ data }: { data: IHierarchyData }) => {
     setSearchValue(value);
   };
 
+  const handleOnKeyDown = (e: React.KeyboardEvent) => {
+    const { code } = e.nativeEvent;
+
+    if (code === "Enter") {
+      handleSearchOnClick();
+    }
+  };
+
   return (
     <Box
       className="flex flex-col items-center justify-between py-14 md:py-52 lg:py-60"
@@ -49,6 +57,7 @@ const Hero = ({ data }: { data: IHierarchyData }) => {
           startAdornment={<SearchRounded />}
           endAdornment={SearchButton}
           onChange={handleSearchOnChange}
+          onKeyDown={handleOnKeyDown}
         />
       </Paper>
     </Box>
