@@ -1,7 +1,14 @@
 import { Hero } from "../components/Hero";
 import hierarchy from "./hierarchy";
 import { Box, Grid } from "@mui/material";
-import CompanyHierarchy from "@/components/CompanyHierarchy";
+import dynamic from "next/dynamic";
+const CompanyHierarchy = dynamic(
+  () => import("../components/CompanyHierarchy"),
+  {
+    loading: () => <p>Loading...</p>,
+    ssr: false,
+  }
+);
 import { TreeViewWrapper } from "@/components/TreeView";
 import { HierarchyProvider } from "./context/HierarchyContext";
 
