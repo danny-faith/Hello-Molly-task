@@ -13,6 +13,21 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        subtleping: {
+          "75%": {
+            transform: "scale(1.1)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "scale(1.1)",
+            opacity: "0",
+          },
+        },
+      },
+      animation: {
+        "subtle-ping": "subtleping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
+      },
     },
   },
   important: "#__next",

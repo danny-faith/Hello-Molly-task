@@ -4,9 +4,10 @@ import Typography from "@mui/joy/Typography";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { theme } from "../../theme";
+import { useState } from "react";
 
 const activeStyle = {
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: `${theme.palette.primary.main} !important`,
 };
 const highlightedStyle = {
   backgroundColor: theme.palette.success.main,
@@ -25,6 +26,21 @@ type Props = {
   id: string;
 };
 
+const createSxValues = (isHightlighted: boolean, isActive: boolean) => ({
+  p: 1,
+  maxWidth: 345,
+  display: "inline-block",
+  cursor: "pointer",
+  position: "relative",
+  zIndex: 50,
+  borderTop: `3px solid ${theme.palette.primary.dark}`,
+  "&:hover": {
+    backgroundColor: theme.palette.primary.light,
+  },
+  ...(isHightlighted && highlightedStyle),
+  ...(isActive && activeStyle),
+});
+
 const Employee = ({
   name,
   position,
@@ -36,18 +52,15 @@ const Employee = ({
   isHightlighted,
   onClick,
 }: Props) => {
+  const [elevation, setElevation] = useState(1);
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
-  const sxValues = {
-    p: 1,
-    maxWidth: 345,
-    display: "inline-block",
-    cursor: "pointer",
-    ...(isHightlighted && highlightedStyle),
-    ...(isActive && activeStyle),
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-    },
-  };
+  const sxValues = createSxValues(isHightlighted, isActive);
+
+  if (isActive && elevation !== 5) {
+    setElevation(5);
+  } else if (!isActive && elevation !== 1) {
+    setElevation(1);
+  }
 
   const classes = [];
   if (isHightlighted) {
@@ -62,15 +75,28 @@ const Employee = ({
     onClick(id);
   };
 
+  const handlePaperMouseEnter = () => {
+    setElevation(5);
+  };
+
+  const handlePaperMouseLeave = () => {
+    setElevation(1);
+  };
+
   return (
     <Paper
-      elevation={1}
+      elevation={elevation}
       onClick={handleOnClick}
       sx={sxValues}
       className={classes.join("")}
+      onMouseEnter={handlePaperMouseEnter}
+      onMouseLeave={handlePaperMouseLeave}
     >
-      <Grid container justifyContent="center">
-        <Avatar sx={{ bgcolor: red[500] }} aria-label="Employee">
+      <Grid sx={{ mt: -2 }} container justifyContent="center">
+        <Avatar
+          sx={{ bgcolor: theme.palette.secondary.dark }}
+          aria-label="Employee"
+        >
           {avatarIntial}
         </Avatar>
       </Grid>
