@@ -20,11 +20,13 @@ declare global {
     | "VP of HR"
     | "HR Manager";
 
-  interface IHierarchyData {
+  type Employee = {
     name: string;
     id: string;
     email: string;
     position: Position;
-    children?: IHierarchyData[];
-  }
+    children?: Employee[];
+  };
+
+  type IHierarchyData = Employee[];
 }

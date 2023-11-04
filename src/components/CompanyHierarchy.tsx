@@ -10,7 +10,7 @@ const RenderTree = ({
   nodes,
   isVisible,
 }: {
-  nodes: IHierarchyData;
+  nodes: Employee;
   isVisible: boolean;
   setSelected: any;
 }) => {
@@ -67,8 +67,15 @@ export default function CompanyHierarchy({
   if (!showComponent) return null;
 
   return (
-    <Tree label="Company hierarchy">
-      {<RenderTree nodes={data} isVisible={true} setSelected={setSelected} />}
+    <Tree label="Meet the company">
+      {data.map((x) => (
+        <RenderTree
+          key={x.id}
+          nodes={x}
+          isVisible={true}
+          setSelected={setSelected}
+        />
+      ))}
     </Tree>
   );
 }
