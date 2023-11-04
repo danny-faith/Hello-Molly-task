@@ -49,6 +49,11 @@ const Employee = ({
     },
   };
 
+  const classes = [];
+  if (isHightlighted) {
+    classes.push("animate-pulse");
+  }
+
   const handleExpandClick = () => {
     setVisible(!current);
   };
@@ -58,7 +63,12 @@ const Employee = ({
   };
 
   return (
-    <Paper elevation={1} onClick={handleOnClick} sx={sxValues}>
+    <Paper
+      elevation={1}
+      onClick={handleOnClick}
+      sx={sxValues}
+      className={classes.join("")}
+    >
       <Grid container justifyContent="center">
         <Avatar sx={{ bgcolor: red[500] }} aria-label="Employee">
           {avatarIntial}
