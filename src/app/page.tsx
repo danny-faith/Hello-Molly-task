@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <Box>
-      {/* <Hero /> */}
+      <Hero data={hierarchy} />
       <Box py={5}>
         <Typography>Home</Typography>
       </Box>

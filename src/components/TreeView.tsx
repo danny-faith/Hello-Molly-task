@@ -6,7 +6,7 @@ import { TreeView } from "@mui/x-tree-view/TreeView";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material";
 
-const renderTree = (nodes: IHierarchyData) => (
+const renderTree = (nodes: Employee) => (
   <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
     {Array.isArray(nodes.children)
       ? nodes.children.map((node) => renderTree(node))
@@ -26,7 +26,7 @@ const TreeViewDemo = ({ data }: { data: IHierarchyData }) => {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      {renderTree(data)}
+      {data.map((elem) => renderTree(elem))}
     </TreeView>
   );
 };
