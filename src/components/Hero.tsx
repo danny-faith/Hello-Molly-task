@@ -1,10 +1,36 @@
+"use client";
+import { useHierarchyContext } from "@/app/context/HierarchyContext";
 import SearchRounded from "@mui/icons-material/SearchRounded";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Paper from "@mui/material/Paper";
+import { useState } from "react";
+import { searchEmployees } from "../../utils/utils";
 
-const Hero = () => {
+const Hero = ({ data }: { data: IHierarchyData }) => {
+  const [searchValue, setSearchValue] = useState("");
+  const { setHighlighted } = useHierarchyContext();
+
+  function handleSearchOnClick() {
+    const foundEmployees = searchEmployees(data, searchValue);
+    if (foundEmployees) {
+      setHighlighted(foundEmployees);
+    }
+  }
+
+  const SearchButton = (
+    <Button onClick={handleSearchOnClick} sx={{ px: 4 }}>
+      Search
+    </Button>
+  );
+
+  const handleSearchOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setSearchValue(value);
+  };
+
   return (
     <Box
       className="flex flex-col items-center justify-between py-14 md:py-52 lg:py-60"
@@ -19,7 +45,8 @@ const Hero = () => {
         <Input
           size="medium"
           startAdornment={<SearchRounded />}
-          endAdornment={<Button sx={{ px: 4 }}>Search</Button>}
+          endAdornment={SearchButton}
+          onChange={handleSearchOnChange}
         />
       </Paper>
     </Box>

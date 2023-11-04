@@ -15,15 +15,14 @@ const RenderTree = ({
   setSelected: any;
 }) => {
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
-  const { selected, setSelected, highlighted, setHighlighted } =
-    useHierarchyContext();
+  const { selected, setSelected, highlighted } = useHierarchyContext();
+
   const treeNodeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
   const showCollapseButton = Array.isArray(nodes.children)
     ? nodes.children.length > 0
     : false;
   const isActive = nodes.id === selected ? true : false;
   const isHightlighted = highlighted.includes(nodes.id);
-  console.log("isHightlighted", isHightlighted);
 
   return (
     <TreeNode
