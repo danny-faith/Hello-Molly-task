@@ -16,7 +16,9 @@ const Hero = ({ data }: { data: IHierarchyData }) => {
     const foundEmployees = searchEmployees(data, searchValue);
     if (foundEmployees) {
       setHighlighted(foundEmployees);
+      return;
     }
+    setHighlighted([]);
   }
 
   const SearchButton = (
