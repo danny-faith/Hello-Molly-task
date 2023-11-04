@@ -4,17 +4,37 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { TreeView } from "@mui/x-tree-view/TreeView";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material";
+import { Avatar, CardHeader, useTheme } from "@mui/material";
+import { theme } from "../../theme";
 
-const renderTree = (nodes: Employee) => (
-  <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-    {Array.isArray(nodes.children)
-      ? nodes.children.map((node) => renderTree(node))
+const TreeViewLabel = ({ name, position }: Employee) => {
+  const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
+
+  return (
+    <CardHeader
+      avatar={
+        <Avatar
+          sx={{ bgcolor: theme.palette.secondary.dark }}
+          aria-label="Employee"
+        >
+          {avatarIntial}
+        </Avatar>
+      }
+      title={name}
+      subheader={position}
+    />
+  );
+};
+
+const renderTree = (node: Employee) => (
+  <TreeItem key={node.id} nodeId={node.id} label={TreeViewLabel(node)}>
+    {Array.isArray(node.children)
+      ? node.children.map((childNode) => renderTree(childNode))
       : null}
   </TreeItem>
 );
 
-const TreeViewDemo = ({ data }: { data: IHierarchyData }) => {
+const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -26,9 +46,9 @@ const TreeViewDemo = ({ data }: { data: IHierarchyData }) => {
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
     >
-      {data.map((elem) => renderTree(elem))}
+      {data.map((node) => renderTree(node))}
     </TreeView>
   );
 };
 
-export { TreeViewDemo };
+export { TreeViewWrapper };

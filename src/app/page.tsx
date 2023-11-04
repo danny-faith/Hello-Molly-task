@@ -2,7 +2,7 @@ import { Hero } from "../components/Hero";
 import hierarchy from "./hierarchy";
 import { Box, Grid } from "@mui/material";
 import CompanyHierarchy from "@/components/CompanyHierarchy";
-import { TreeViewDemo } from "@/components/TreeView";
+import { TreeViewWrapper } from "@/components/TreeView";
 import { HierarchyProvider } from "./context/HierarchyContext";
 
 async function getHiearchyServerSide() {
@@ -16,7 +16,7 @@ export default async function Home() {
     <Box>
       <HierarchyProvider>
         <Hero data={hierarchy} />
-        <TreeViewDemo data={hierarchy} />
+        <TreeViewWrapper data={hierarchy} />
         <Grid container justifyContent="center">
           <Grid xs={12} md={8} lg={12}>
             <Box py={5}>
