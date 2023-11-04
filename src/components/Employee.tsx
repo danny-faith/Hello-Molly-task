@@ -101,16 +101,22 @@ const Employee = ({
         </Avatar>
       </Grid>
       <Typography
-        fontSize={14}
+        fontSize={{ md: 14, lg: 16, xl: 18 }}
         fontWeight={500}
         textAlign="center"
         noWrap
         maxWidth={200}
         mt={1}
+        // variant="hierarchyname" // frustrating this did not work
       >
         {name}
       </Typography>
-      <Typography fontSize={12} textAlign="center" noWrap maxWidth={200}>
+      <Typography
+        fontSize={{ md: 12, lg: 14, xl: 16 }}
+        textAlign="center"
+        noWrap
+        maxWidth={200}
+      >
         {position}
       </Typography>
       {showCollapseButton && (

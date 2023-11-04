@@ -24,7 +24,6 @@ export default async function ReactOrganizationalChart() {
     <Box>
       <HierarchyProvider>
         <Hero data={hierarchy} />
-        {/* <BreakPoint> */}
         <TreeViewWrapper data={hierarchy} />
         <Grid container justifyContent="center">
           <Grid xs={12} md={8} lg={12}>
@@ -34,7 +33,6 @@ export default async function ReactOrganizationalChart() {
           </Grid>
         </Grid>
       </HierarchyProvider>
-      {/* </BreakPoint> */}
     </Box>
   );
 }

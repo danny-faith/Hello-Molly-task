@@ -17,4 +17,18 @@ export const theme = createTheme({
       main: "#F6F9A1",
     },
   },
+  typography: {
+    hierarchyname: {
+      fontSize: "1.2rem",
+    },
+  },
+  components: {
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          hierarchyname: "h2",
+        },
+      },
+    },
+  },
 });

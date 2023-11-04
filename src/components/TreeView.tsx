@@ -20,7 +20,7 @@ const TreeViewLabel = ({ name, position }: Employee) => {
           {avatarIntial}
         </Avatar>
       }
-      title={name}
+      title={name} // this should be typography comp with variant="hierarchyname"
       subheader={position}
     />
   );
