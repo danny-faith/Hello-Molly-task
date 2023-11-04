@@ -13,6 +13,8 @@ function findBestMatch(
 }
 
 export function searchEmployees(src: IHierarchyData, target: string) {
+  if (target.length < 1) return;
+
   const found = [];
   const lowercaseTrimmedTarget = target.toLowerCase().trim();
 
