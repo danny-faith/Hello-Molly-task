@@ -4,7 +4,7 @@ import { Employee } from "./Employee";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import React from "react";
-import { useHivizContext } from "@/app/context/HierarchyContext";
+import { useHierarchyContext } from "@/app/context/HierarchyContext";
 
 const RenderTree = ({
   nodes,
@@ -15,12 +15,15 @@ const RenderTree = ({
   setSelected: any;
 }) => {
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
-  const { selected, setSelected } = useHivizContext();
+  const { selected, setSelected, highlighted, setHighlighted } =
+    useHierarchyContext();
   const treeNodeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
   const showCollapseButton = Array.isArray(nodes.children)
     ? nodes.children.length > 0
     : false;
   const isActive = nodes.id === selected ? true : false;
+  const isHightlighted = highlighted.includes(nodes.id);
+  console.log("isHightlighted", isHightlighted);
 
   return (
     <TreeNode
@@ -33,7 +36,8 @@ const RenderTree = ({
           setVisible={setVisible}
           current={visible}
           showCollapseButton={showCollapseButton}
-          active={isActive}
+          isActive={isActive}
+          isHightlighted={isHightlighted}
           onClick={setSelected}
         />
       }

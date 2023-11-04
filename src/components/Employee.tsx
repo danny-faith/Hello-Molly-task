@@ -8,8 +8,8 @@ import { theme } from "../../theme";
 const activeStyle = {
   backgroundColor: theme.palette.primary.main,
 };
-const hoverStyle = {
-  backgroundColor: theme.palette.secondary.main,
+const highlightedStyle = {
+  backgroundColor: theme.palette.success.main,
 };
 
 // TODO incorporate into IHierarchyData type
@@ -19,7 +19,8 @@ type Props = {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   current: boolean;
   showCollapseButton: boolean;
-  active: boolean;
+  isActive: boolean;
+  isHightlighted: boolean;
   onClick: any;
   id: string;
 };
@@ -31,7 +32,8 @@ const Employee = ({
   setVisible,
   current,
   showCollapseButton,
-  active,
+  isActive,
+  isHightlighted,
   onClick,
 }: Props) => {
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
@@ -40,7 +42,8 @@ const Employee = ({
     maxWidth: 345,
     display: "inline-block",
     cursor: "pointer",
-    ...(active && activeStyle),
+    ...(isHightlighted && highlightedStyle),
+    ...(isActive && activeStyle),
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
