@@ -22,7 +22,7 @@ export default async function Home() {
 
   return (
     <Box>
-      <HierarchyProvider>
+      <HierarchyProvider data={hierarchy}>
         <Hero data={hierarchy} />
         <TreeViewWrapper data={hierarchy} />
         <HierarchyNavigation
