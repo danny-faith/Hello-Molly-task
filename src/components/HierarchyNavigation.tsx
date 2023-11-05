@@ -21,27 +21,42 @@ const HierarchyNavigation = ({
 }) => {
   const { setCurrentNode, currentNode } = useHierarchyContext();
 
-  const cursor = useMemo(() => {
-    return new Cursor(data);
-  }, [data]);
+  const cursor = useMemo(() => new Cursor(data), [data]);
 
-  const navigationHandler = (e: React.BaseSyntheticEvent) => {
-    const { value } = e.target;
-    switch (value) {
+  const navigationDirectionReducer = (keyCode: string) => {
+    switch (keyCode) {
       case "up":
+      case "ArrowUp":
         cursor.up();
         break;
       case "left":
+      case "ArrowLeft":
         cursor.left();
         break;
       case "right":
+      case "ArrowRight":
         cursor.right();
         break;
       default:
         cursor.down();
         break;
     }
-    const id = cursor?.get().id;
+
+    return cursor.get().id;
+  };
+
+  const handleNavigationButton = (e: React.BaseSyntheticEvent) => {
+    const { value } = e.target;
+    const id = navigationDirectionReducer(value);
+
+    if (id) {
+      setCurrentNode(id);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const { code } = e.nativeEvent;
+    const id = navigationDirectionReducer(code);
 
     if (id) {
       setCurrentNode(id);
@@ -49,11 +64,15 @@ const HierarchyNavigation = ({
   };
 
   return (
-    <Box sx={sx}>
+    <Box sx={sx} onKeyDown={handleKeyDown}>
       <Container>
         <Grid sx={{ p: 1 }} container justifyContent="center">
           <Grid container item lg={3} justifyContent="center">
-            <Button onClick={navigationHandler} value="up" variant="contained">
+            <Button
+              onClick={handleNavigationButton}
+              value="up"
+              variant="contained"
+            >
               Up
             </Button>
           </Grid>
@@ -61,7 +80,7 @@ const HierarchyNavigation = ({
         <Grid container justifyContent="center">
           <Grid sx={{ p: 1 }} item={true}>
             <Button
-              onClick={navigationHandler}
+              onClick={handleNavigationButton}
               value="left"
               variant="contained"
             >
@@ -73,7 +92,7 @@ const HierarchyNavigation = ({
           </Grid>
           <Grid sx={{ p: 1 }} item={true}>
             <Button
-              onClick={navigationHandler}
+              onClick={handleNavigationButton}
               value="right"
               variant="contained"
             >
@@ -84,7 +103,7 @@ const HierarchyNavigation = ({
         <Grid sx={{ p: 1 }} container justifyContent="center">
           <Grid container item lg={3} justifyContent="center">
             <Button
-              onClick={navigationHandler}
+              onClick={handleNavigationButton}
               value="down"
               variant="contained"
             >
