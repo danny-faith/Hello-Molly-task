@@ -59,6 +59,7 @@ const Hero = ({ data }: { data: IHierarchyData }) => {
           endAdornment={SearchButton}
           onChange={handleSearchOnChange}
           onKeyDown={handleOnKeyDown}
+          name="search"
         />
       </Paper>
     </Box>
