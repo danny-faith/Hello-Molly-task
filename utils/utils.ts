@@ -1,39 +1,56 @@
 function findBestMatch(
-  subArray: IHierarchyData,
-  lowercaseTrimmedTarget: string
+  childrenArray: IHierarchyData,
+  lowercaseTrimmedName: string
 ) {
-  const res = subArray
-    .filter(({ name }) => {
-      const lowercaseName = name.toLowerCase();
-      const isMatch = lowercaseName.includes(lowercaseTrimmedTarget);
-      if (isMatch) return true;
-    })
-    .map((x) => x.id);
+  const lookForEmployee = ({ name }: { name: string }) => {
+    const lowercaseName = name.toLowerCase();
+    const isMatch = lowercaseName.includes(lowercaseTrimmedName);
+
+    if (isMatch) return true;
+  };
+  const onlyEmployeeId = (x: Employee) => x.id;
+
+  const res = childrenArray.filter(lookForEmployee).map(onlyEmployeeId);
+
   return res;
 }
 
-export function searchEmployees(src: IHierarchyData, target: string) {
-  if (target.length < 1) return;
+const ifArrayLookForEmployee = (
+  value: string | Employee[],
+  lowercaseTrimmedName: string,
+  found: string[]
+) => {
+  if (Array.isArray(value)) {
+    const res = searchEmployees(value, lowercaseTrimmedName);
 
-  const found = [];
-  const lowercaseTrimmedTarget = target.toLowerCase().trim();
+    if (res) {
+      found.push(...res);
+    }
+  }
+};
 
-  if (Array.isArray(src) && src.length === 0) return;
+export function searchEmployees(src: IHierarchyData, employeeName: string) {
+  const noSearchTerm = employeeName.length < 1;
+  const nothingToSearchThrough = Array.isArray(src) && src.length === 0;
+
+  if (noSearchTerm) return;
+  if (nothingToSearchThrough) return;
+
+  const found: string[] = [];
+  const lowercaseTrimmedName = employeeName.toLowerCase().trim();
+
   if (Array.isArray(src)) {
-    const searchRes = findBestMatch(src, lowercaseTrimmedTarget);
-    found.push(...searchRes);
+    const searchRes = findBestMatch(src, lowercaseTrimmedName);
+    if (searchRes.length > 0) {
+      found.push(...searchRes);
+    }
   }
 
   if (typeof src === "object") {
     Object.values(src).map((value) => {
-      Object.values(value).map((y) => {
-        if (Array.isArray(y)) {
-          const res = searchEmployees(y, lowercaseTrimmedTarget);
-          if (res) {
-            found.push(...res);
-          }
-        }
-      });
+      Object.values(value).map((value) =>
+        ifArrayLookForEmployee(value, lowercaseTrimmedName, found)
+      );
     });
   }
   return found;
