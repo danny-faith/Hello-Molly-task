@@ -93,7 +93,7 @@ export default function CompanyHierarchy({
   function handleExpandAll() {
     setExpandAll(true);
   }
-  throw Error("hello");
+
   return (
     <Box>
       <Button variant="contained" onClick={handleExpandAll}>
