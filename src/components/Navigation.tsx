@@ -11,8 +11,30 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Diversity2 from "@mui/icons-material/Diversity2";
+import Link from "next/link";
 
-const pages = ["Home", "About Us", "Services", "Contact Us", "Blog"];
+const pages = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "About Us",
+    href: "/about-us",
+  },
+  {
+    label: "Services",
+    href: "/services",
+  },
+  {
+    label: "Contact Us",
+    href: "/contact-us",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+];
 
 function Navigation() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -31,7 +53,9 @@ function Navigation() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Diversity2 sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Link href="/">
+            <Diversity2 sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          </Link>
 
           <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -62,26 +86,38 @@ function Navigation() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(({ label, href }) => (
+                <MenuItem key={href} onClick={handleCloseNavMenu}>
+                  <Link href={href} style={{ textDecoration: "none" }}>
+                    <Typography textAlign="center">{label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Diversity2
-            sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1, mr: 6 }}
-          />
+          <Link
+            href="/"
+            style={{ display: "flex", flexGrow: 1, color: "inherit" }}
+          >
+            <Diversity2
+              sx={{ display: { xs: "flex", md: "none" }, flexGrow: 1, mr: 6 }}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+            {pages.map(({ label, href }) => (
+              <Link key={href} href={href} style={{ textDecoration: "none" }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                  }}
+                >
+                  {label}
+                </Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
