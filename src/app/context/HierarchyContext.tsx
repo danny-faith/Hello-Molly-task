@@ -5,8 +5,10 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useMemo,
   useState,
 } from "react";
+import { Cursor } from "../../../utils/utils";
 
 type hierarchyContextType = {
   selected: string;
@@ -17,6 +19,7 @@ type hierarchyContextType = {
   setExpandAll: Dispatch<SetStateAction<boolean>>;
   currentNode: string;
   setCurrentNode: Dispatch<SetStateAction<string>>;
+  cursor: Cursor;
 };
 
 const hieracrchyContextDefaultValues: hierarchyContextType = {
@@ -28,6 +31,7 @@ const hieracrchyContextDefaultValues: hierarchyContextType = {
   setExpandAll: () => {},
   currentNode: "5555",
   setCurrentNode: () => {},
+  cursor: new Cursor([]),
 };
 
 const HierarchyContext = createContext<hierarchyContextType>(
@@ -38,7 +42,13 @@ export function useHierarchyContext() {
   return useContext(HierarchyContext);
 }
 
-export function HierarchyProvider({ children }: { children: React.ReactNode }) {
+export function HierarchyProvider({
+  children,
+  data,
+}: {
+  children: React.ReactNode;
+  data: IHierarchyData;
+}) {
   const [selected, setSelected] = useState(
     hieracrchyContextDefaultValues.selected
   );
@@ -51,6 +61,7 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
   const [currentNode, setCurrentNode] = useState(
     hieracrchyContextDefaultValues.currentNode
   );
+  const cursor = useMemo(() => new Cursor(data), [data]);
 
   const value = {
     selected,
@@ -61,6 +72,7 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
     setExpandAll,
     currentNode,
     setCurrentNode,
+    cursor,
   };
 
   return (

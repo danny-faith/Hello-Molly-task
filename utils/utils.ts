@@ -93,3 +93,25 @@ export class Cursor {
     return i;
   }
 }
+
+export const navigationDirectionReducer = (keyCode: string, cursor: Cursor) => {
+  switch (keyCode) {
+    case "up":
+    case "ArrowUp":
+      cursor.up();
+      break;
+    case "left":
+    case "ArrowLeft":
+      cursor.left();
+      break;
+    case "right":
+    case "ArrowRight":
+      cursor.right();
+      break;
+    default:
+      cursor.down();
+      break;
+  }
+
+  return cursor.get().id;
+};

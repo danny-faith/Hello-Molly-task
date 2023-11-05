@@ -9,8 +9,8 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
-import React, { useMemo } from "react";
-import { Cursor } from "../../utils/utils";
+import React from "react";
+import { navigationDirectionReducer } from "../../utils/utils";
 
 const HierarchyNavigation = ({
   data,
@@ -19,44 +19,11 @@ const HierarchyNavigation = ({
   data: IHierarchyData;
   sx?: SxProps<Theme> | undefined;
 }) => {
-  const { setCurrentNode, currentNode } = useHierarchyContext();
-
-  const cursor = useMemo(() => new Cursor(data), [data]);
-
-  const navigationDirectionReducer = (keyCode: string) => {
-    switch (keyCode) {
-      case "up":
-      case "ArrowUp":
-        cursor.up();
-        break;
-      case "left":
-      case "ArrowLeft":
-        cursor.left();
-        break;
-      case "right":
-      case "ArrowRight":
-        cursor.right();
-        break;
-      default:
-        cursor.down();
-        break;
-    }
-
-    return cursor.get().id;
-  };
+  const { setCurrentNode, currentNode, cursor } = useHierarchyContext();
 
   const handleNavigationButton = (e: React.BaseSyntheticEvent) => {
     const { value } = e.target;
-    const id = navigationDirectionReducer(value);
-
-    if (id) {
-      setCurrentNode(id);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const { code } = e.nativeEvent;
-    const id = navigationDirectionReducer(code);
+    const id = navigationDirectionReducer(value, cursor);
 
     if (id) {
       setCurrentNode(id);
@@ -64,7 +31,7 @@ const HierarchyNavigation = ({
   };
 
   return (
-    <Box sx={sx} onKeyDown={handleKeyDown}>
+    <Box sx={sx}>
       <Container>
         <Grid sx={{ p: 1 }} container justifyContent="center">
           <Grid container item lg={3} justifyContent="center">
@@ -87,8 +54,8 @@ const HierarchyNavigation = ({
               Left
             </Button>
           </Grid>
-          <Grid sx={{ p: 1 }} item={true}>
-            <Typography>{currentNode}</Typography>
+          <Grid sx={{ p: 3 }} item={true}>
+            {/* <Typography>{currentNode}</Typography> */}
           </Grid>
           <Grid sx={{ p: 1 }} item={true}>
             <Button

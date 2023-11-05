@@ -5,6 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { Box, Button, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import { useHierarchyContext } from "@/app/context/HierarchyContext";
+import { navigationDirectionReducer } from "../../utils/utils";
 
 // This component needs refactoring, too big
 const RenderTree = ({
@@ -23,7 +24,7 @@ const RenderTree = ({
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
   const { selected, setSelected, highlighted, expandAll } =
     useHierarchyContext();
-  const treeNodeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
+  const fadeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
   const showCollapseButton = Array.isArray(nodes.children)
     ? nodes.children.length > 0
     : false;
@@ -58,7 +59,7 @@ const RenderTree = ({
           onClick={setSelected}
         />
       }
-      className={treeNodeClass}
+      className={fadeClass}
     >
       {Array.isArray(nodes.children)
         ? nodes.children.map((node, i) => (
@@ -85,18 +86,28 @@ export default function CompanyHierarchy({
   data: IHierarchyData;
   setSelected: any;
 }) {
-  const { setExpandAll, expandAll, currentNode } = useHierarchyContext();
+  const { setExpandAll, expandAll, currentNode, setCurrentNode, cursor } =
+    useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.up("md"));
 
   if (!showComponent) return null;
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const { code } = e.nativeEvent;
+    const id = navigationDirectionReducer(code, cursor);
+
+    if (id) {
+      setCurrentNode(id);
+    }
+  };
 
   function handleExpandAll() {
     setExpandAll(true);
   }
 
   return (
-    <Box>
+    <Box tabIndex={-1} onKeyDown={handleKeyDown}>
       <Button variant="contained" onClick={handleExpandAll}>
         Expand all
       </Button>
