@@ -5,7 +5,11 @@ import dynamic from "next/dynamic";
 const CompanyHierarchy = dynamic(
   () => import("../components/CompanyHierarchy"),
   {
-    loading: () => <p>Loading...</p>,
+    loading: () => (
+      <Grid container justifyContent="center">
+        <p>Loading...</p>
+      </Grid>
+    ),
     ssr: false,
   }
 );
