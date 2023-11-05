@@ -46,7 +46,6 @@ export class Cursor {
   constructor(data: IHierarchyData) {
     this.path = [{ children: data }];
     this.current = data[0];
-    console.log("this.path", this.path);
   }
   get() {
     return this.current;
