@@ -25,7 +25,10 @@ export default async function Home() {
       <HierarchyProvider>
         <Hero data={hierarchy} />
         <TreeViewWrapper data={hierarchy} />
-        <HierarchyNavigation data={hierarchy} />
+        <HierarchyNavigation
+          sx={{ display: { xs: "none", md: "flex" } }}
+          data={hierarchy}
+        />
         <Grid container justifyContent="center">
           <Grid md={12} item={true}>
             <Box py={5}>

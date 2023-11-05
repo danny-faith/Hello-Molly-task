@@ -1,10 +1,24 @@
 "use client";
 import { useHierarchyContext } from "@/app/context/HierarchyContext";
-import { Container, Button, Grid, Typography, Box } from "@mui/material";
+import {
+  Container,
+  Button,
+  Grid,
+  Typography,
+  Box,
+  SxProps,
+  Theme,
+} from "@mui/material";
 import React, { useMemo } from "react";
 import { Cursor } from "../../utils/utils";
 
-const HierarchyNavigation = ({ data }: { data: IHierarchyData }) => {
+const HierarchyNavigation = ({
+  data,
+  sx,
+}: {
+  data: IHierarchyData;
+  sx?: SxProps<Theme> | undefined;
+}) => {
   const { setCurrentNode, currentNode } = useHierarchyContext();
 
   const cursor = useMemo(() => {
@@ -35,37 +49,51 @@ const HierarchyNavigation = ({ data }: { data: IHierarchyData }) => {
   };
 
   return (
-    <Container>
-      <Grid sx={{ p: 1 }} container justifyContent="center">
-        <Grid container item lg={3} justifyContent="center">
-          <Button onClick={navigationHandler} value="up" variant="contained">
-            Up
-          </Button>
+    <Box sx={sx}>
+      <Container>
+        <Grid sx={{ p: 1 }} container justifyContent="center">
+          <Grid container item lg={3} justifyContent="center">
+            <Button onClick={navigationHandler} value="up" variant="contained">
+              Up
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container justifyContent="center">
-        <Grid sx={{ p: 1 }} item={true}>
-          <Button onClick={navigationHandler} value="left" variant="contained">
-            Left
-          </Button>
+        <Grid container justifyContent="center">
+          <Grid sx={{ p: 1 }} item={true}>
+            <Button
+              onClick={navigationHandler}
+              value="left"
+              variant="contained"
+            >
+              Left
+            </Button>
+          </Grid>
+          <Grid sx={{ p: 1 }} item={true}>
+            <Typography>{currentNode}</Typography>
+          </Grid>
+          <Grid sx={{ p: 1 }} item={true}>
+            <Button
+              onClick={navigationHandler}
+              value="right"
+              variant="contained"
+            >
+              Right
+            </Button>
+          </Grid>
         </Grid>
-        <Grid sx={{ p: 1 }} item={true}>
-          <Typography>{currentNode}</Typography>
+        <Grid sx={{ p: 1 }} container justifyContent="center">
+          <Grid container item lg={3} justifyContent="center">
+            <Button
+              onClick={navigationHandler}
+              value="down"
+              variant="contained"
+            >
+              Down
+            </Button>
+          </Grid>
         </Grid>
-        <Grid sx={{ p: 1 }} item={true}>
-          <Button onClick={navigationHandler} value="right" variant="contained">
-            Right
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid sx={{ p: 1 }} container justifyContent="center">
-        <Grid container item lg={3} justifyContent="center">
-          <Button onClick={navigationHandler} value="down" variant="contained">
-            Down
-          </Button>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
