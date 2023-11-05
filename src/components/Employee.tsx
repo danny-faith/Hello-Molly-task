@@ -12,6 +12,9 @@ const activeStyle = {
 const highlightedStyle = {
   backgroundColor: theme.palette.success.main,
 };
+const currentNodeStyle = {
+  backgroundColor: theme.palette.success.light,
+};
 
 // TODO incorporate into IHierarchyData type
 type Props = {
@@ -24,9 +27,14 @@ type Props = {
   isHightlighted: boolean;
   onClick: any;
   id: string;
+  isCurrentNode: boolean;
 };
 
-const createSxValues = (isHightlighted: boolean, isActive: boolean) => ({
+const createSxValues = (
+  isHightlighted: boolean,
+  isActive: boolean,
+  isCurrentNode: boolean
+) => ({
   p: 1,
   maxWidth: 345,
   display: "inline-block",
@@ -39,6 +47,7 @@ const createSxValues = (isHightlighted: boolean, isActive: boolean) => ({
   },
   ...(isHightlighted && highlightedStyle),
   ...(isActive && activeStyle),
+  ...(isCurrentNode && currentNodeStyle),
 });
 
 const Employee = ({
@@ -51,10 +60,11 @@ const Employee = ({
   isActive,
   isHightlighted,
   onClick,
+  isCurrentNode,
 }: Props) => {
   const [elevation, setElevation] = useState(1);
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
-  const sxValues = createSxValues(isHightlighted, isActive);
+  const sxValues = createSxValues(isHightlighted, isActive, isCurrentNode);
 
   if (isActive && elevation !== 5) {
     setElevation(5);
@@ -107,7 +117,7 @@ const Employee = ({
         noWrap
         maxWidth={200}
         mt={1}
-        // variant="hierarchyname" // frustrating this did not work
+        // variant="hierarchyname" // frustrating this did not work, something wrong with Typeography and variant prop
       >
         {name}
       </Typography>

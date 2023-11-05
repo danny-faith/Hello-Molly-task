@@ -3,19 +3,22 @@ import { Tree, TreeNode } from "react-organizational-chart";
 import { Employee } from "./Employee";
 import { useTheme } from "@mui/material/styles";
 import { Box, Button, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHierarchyContext } from "@/app/context/HierarchyContext";
 
+// This component needs refactoring, too big
 const RenderTree = ({
   nodes,
   isVisible,
   setExpandAll,
+  currentNode,
 }: {
   nodes: Employee;
   isVisible: boolean;
   setSelected: any;
   expandAll: boolean;
   setExpandAll: React.Dispatch<React.SetStateAction<boolean>>;
+  currentNode: string;
 }) => {
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
   const { selected, setSelected, highlighted, expandAll } =
@@ -26,6 +29,7 @@ const RenderTree = ({
     : false;
   const isActive = nodes.id === selected ? true : false;
   const isHightlighted = highlighted.includes(nodes.id);
+  const isCurrentNode = currentNode === nodes.id;
 
   useEffect(() => {
     if (expandAll) {
@@ -47,6 +51,7 @@ const RenderTree = ({
           showCollapseButton={showCollapseButton}
           isActive={isActive}
           isHightlighted={isHightlighted}
+          isCurrentNode={isCurrentNode}
           onClick={setSelected}
         />
       }
@@ -61,6 +66,7 @@ const RenderTree = ({
               setSelected={setSelected}
               expandAll={expandAll}
               setExpandAll={setExpandAll}
+              currentNode={currentNode}
             />
           ))
         : null}
@@ -76,7 +82,7 @@ export default function CompanyHierarchy({
   data: IHierarchyData;
   setSelected: any;
 }) {
-  const { setExpandAll, expandAll } = useHierarchyContext();
+  const { setExpandAll, expandAll, currentNode } = useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.up("md"));
 
@@ -100,6 +106,7 @@ export default function CompanyHierarchy({
             setSelected={setSelected}
             expandAll={expandAll}
             setExpandAll={setExpandAll}
+            currentNode={currentNode}
           />
         ))}
       </Tree>

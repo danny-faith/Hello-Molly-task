@@ -15,6 +15,7 @@ export const theme = createTheme({
     },
     success: {
       main: "#F6F9A1",
+      light: "#a4a1f9",
     },
   },
   typography: {

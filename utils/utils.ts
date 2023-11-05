@@ -38,3 +38,42 @@ export function searchEmployees(src: IHierarchyData, target: string) {
   }
   return found;
 }
+
+export class Cursor {
+  private path: Array<any>;
+  private current: Employee;
+
+  constructor(data: IHierarchyData) {
+    this.path = [{ children: data }];
+    this.current = data[0];
+    console.log("this.path", this.path);
+  }
+  get() {
+    return this.current;
+  }
+  down() {
+    if (this.current?.children?.length) {
+      this.path.push(this.current);
+      this.current = this.current.children[0];
+    }
+  }
+  up() {
+    if (this.path.length > 1) {
+      this.current = this.path.pop();
+    }
+  }
+  right() {
+    this.current =
+      this.path.at(-1)?.children?.[this.getChildIndex() + 1] ?? this.current;
+  }
+  left() {
+    this.current =
+      this.path.at(-1)?.children?.[this.getChildIndex() - 1] ?? this.current;
+  }
+  getChildIndex() {
+    if (!this.path.length) return 0;
+    let i = this.path.at(-1).children.indexOf(this.current);
+    if (i < 0) throw "Inconsistency";
+    return i;
+  }
+}

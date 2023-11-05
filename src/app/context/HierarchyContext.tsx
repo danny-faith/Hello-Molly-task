@@ -15,6 +15,8 @@ type hierarchyContextType = {
   setHighlighted: Dispatch<SetStateAction<string[]>>;
   expandAll: boolean;
   setExpandAll: Dispatch<SetStateAction<boolean>>;
+  currentNode: string;
+  setCurrentNode: Dispatch<SetStateAction<string>>;
 };
 
 const hieracrchyContextDefaultValues: hierarchyContextType = {
@@ -24,6 +26,8 @@ const hieracrchyContextDefaultValues: hierarchyContextType = {
   setHighlighted: () => {},
   expandAll: false,
   setExpandAll: () => {},
+  currentNode: "5555",
+  setCurrentNode: () => {},
 };
 
 const HierarchyContext = createContext<hierarchyContextType>(
@@ -44,6 +48,9 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
   const [expandAll, setExpandAll] = useState(
     hieracrchyContextDefaultValues.expandAll
   );
+  const [currentNode, setCurrentNode] = useState(
+    hieracrchyContextDefaultValues.currentNode
+  );
 
   const value = {
     selected,
@@ -52,6 +59,8 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
     setHighlighted,
     expandAll,
     setExpandAll,
+    currentNode,
+    setCurrentNode,
   };
 
   return (
