@@ -25,6 +25,7 @@ declare global {
     id: string;
     email: string;
     position: Position;
+    avatar: string;
     children?: Employee[];
   };
 

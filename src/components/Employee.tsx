@@ -20,6 +20,7 @@ const currentNodeStyle = {
 type Props = {
   name: string;
   position: Position;
+  avatar: string;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   current: boolean;
   showCollapseButton: boolean;
@@ -54,6 +55,7 @@ const Employee = ({
   name,
   position,
   id,
+  avatar,
   setVisible,
   current,
   showCollapseButton,
@@ -106,6 +108,7 @@ const Employee = ({
         <Avatar
           sx={{ bgcolor: theme.palette.secondary.dark }}
           aria-label="Employee"
+          src={avatar}
         >
           {avatarIntial}
         </Avatar>

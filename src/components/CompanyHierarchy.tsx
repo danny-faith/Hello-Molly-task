@@ -47,6 +47,7 @@ const RenderTree = ({
         <Employee
           position={nodes.position}
           name={nodes.name}
+          avatar={nodes.avatar}
           id={nodes.id}
           setVisible={setVisible}
           current={visible}
