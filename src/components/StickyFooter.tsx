@@ -12,7 +12,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
-      <Link href="#">Hollo Molly Hierarchy</Link> {new Date().getFullYear()}
+      <Link href="/">Hollo Molly Hierarchy</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -34,23 +34,21 @@ export default function StickyFooter() {
       >
         <Grid container component="footer" spacing={2} maxWidth="lg">
           <Grid xs={12} sm={4}>
-            <Link href="#">
-              <Diversity2 />
-              <Copyright />
-            </Link>
+            <Diversity2 />
+            <Copyright />
           </Grid>
           <Grid xs={12} sm={4}>
             <Typography>
-              <Link href="#">Privacy Policy</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </Typography>
             <Typography>
-              <Link href="#">Terms of Service</Link>
+              <Link href="/terms-of-service">Terms of Service</Link>
             </Typography>
             <Typography>
-              <Link href="#">Careers</Link>
+              <Link href="/careers">Careers</Link>
             </Typography>
             <Typography>
-              <Link href="#">Copyright</Link>
+              <Link href="/copyright">Copyright</Link>
             </Typography>
           </Grid>
           <Grid xs={12} sm={4}>

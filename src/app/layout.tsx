@@ -6,7 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Navigation } from "../components/Navigation";
-// import StickyFooter from "./components/StickyFooter";
+import StickyFooter from "../components/StickyFooter";
 import ThemeRegistry from "./ThemeRegistry";
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({
         >
           <Navigation />
           {children}
-          {/* <StickyFooter /> */}
+          <StickyFooter />
         </Box>
       </ThemeRegistry>
     </html>
