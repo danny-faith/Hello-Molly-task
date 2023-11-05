@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Rohan and Hello Molly employees, please clone repo, install dependencies and run project as guided below. There are no extra setup processes from the norm and project will be available on port 3000.
+
+To get started install dependencies
+
+```bash
+npm i
+```
+
+Then run the development server:
 
 ```bash
 npm run dev
