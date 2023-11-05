@@ -110,6 +110,7 @@ const Employee = ({
 
     if (code === "Enter") {
       setSelected(id);
+      setVisible(!current);
     }
   };
 
