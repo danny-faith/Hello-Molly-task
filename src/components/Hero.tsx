@@ -47,8 +47,7 @@ const Hero = ({ data }: { data: IHierarchyData }) => {
     <Box
       className="flex flex-col items-center justify-between py-14 md:py-52 lg:py-60"
       sx={{
-        backgroundImage:
-          "url(https://upload.wikimedia.org/wikipedia/commons/b/b7/Download_Thousands_Of_Free_Stunning_Stock_Photos._%2824031439750%29.jpg)",
+        backgroundImage: "url(/hero_background.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
