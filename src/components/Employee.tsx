@@ -1,7 +1,6 @@
-import { Avatar, IconButton, Box, Paper } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { Avatar, IconButton, Paper } from "@mui/material";
 import Typography from "@mui/joy/Typography";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { theme } from "../../theme";
 import { useState } from "react";

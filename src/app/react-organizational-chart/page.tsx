@@ -9,7 +9,7 @@ const CompanyHierarchy = dynamic(
 import { Hero } from "../../components/Hero";
 import hierarchy from "../hierarchy";
 import { Box } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 import { TreeViewWrapper } from "../../components/TreeView";
 import { HierarchyProvider } from "../context/HierarchyContext";
 

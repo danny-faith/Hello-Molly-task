@@ -1,12 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
-// import OrgTree from "react-org-tree";
 const OrgTree = dynamic(() => import("react-org-tree"), {
   loading: () => <p>Loading...</p>,
   ssr: false,
 });
-import { Employee } from "../../components/Employee";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const data = {
   id: 0,
