@@ -77,7 +77,7 @@ export default function ReactHierarchyChart() {
           nodes={nodes}
           direction="vertical"
           randerNode={(node: custNode) => (
-            <Employee name={node.name} position={node.position as any} />
+            <Employee name={node.name} position={node.position} />
           )}
         /> */}
       </Grid>
