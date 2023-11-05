@@ -38,6 +38,8 @@ const RenderTree = ({
     }
   }, [expandAll, setExpandAll, visible]);
 
+  // throw new Error('An error') // uncomment to test Next route error boundaries
+
   return (
     <TreeNode
       key={nodes.id}
@@ -91,7 +93,7 @@ export default function CompanyHierarchy({
   function handleExpandAll() {
     setExpandAll(true);
   }
-
+  throw Error("hello");
   return (
     <Box>
       <Button variant="contained" onClick={handleExpandAll}>
