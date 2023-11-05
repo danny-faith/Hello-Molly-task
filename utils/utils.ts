@@ -108,8 +108,11 @@ export const navigationDirectionReducer = (keyCode: string, cursor: Cursor) => {
     case "ArrowRight":
       cursor.right();
       break;
-    default:
+    case "down":
+    case "ArrowDown":
       cursor.down();
+      break;
+    default:
       break;
   }
 
