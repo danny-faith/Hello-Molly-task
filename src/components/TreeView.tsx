@@ -6,6 +6,10 @@ import { TreeView } from "@mui/x-tree-view/TreeView";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Avatar, CardHeader, useTheme } from "@mui/material";
 import { theme } from "../../theme";
+import { useHierarchyContext } from "@/app/context/HierarchyContext";
+import React, { useEffect } from "react";
+
+const allIds = ["5564", "5560", "5556", "5555"];
 
 const TreeViewLabel = ({ name, position }: Employee) => {
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
@@ -26,17 +30,30 @@ const TreeViewLabel = ({ name, position }: Employee) => {
   );
 };
 
-const renderTree = (node: Employee) => (
+const renderTree = (node: Employee, highlighted: string[]) => (
   <TreeItem key={node.id} nodeId={node.id} label={TreeViewLabel(node)}>
     {Array.isArray(node.children)
-      ? node.children.map((childNode) => renderTree(childNode))
+      ? node.children.map((childNode) => renderTree(childNode, highlighted))
       : null}
   </TreeItem>
 );
 
 const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
+  const { expandAll, highlighted, setExpandAll } = useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.down("md"));
+  const [expanded, setExpanded] = React.useState<string[]>([]);
+
+  useEffect(() => {
+    if (expandAll) {
+      setExpanded(allIds);
+      setExpandAll(false);
+    }
+  }, [expandAll, setExpandAll]);
+
+  const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
+    setExpanded(nodeIds);
+  };
 
   if (!showComponent) return null;
 
@@ -45,8 +62,10 @@ const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
       aria-label="Company navigator"
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      expanded={expanded}
+      onNodeToggle={handleToggle}
     >
-      {data.map((node) => renderTree(node))}
+      {data.map((node) => renderTree(node, highlighted))}
     </TreeView>
   );
 };

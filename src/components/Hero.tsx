@@ -10,14 +10,16 @@ import { searchEmployees } from "../../utils/utils";
 
 const Hero = ({ data }: { data: IHierarchyData }) => {
   const [searchValue, setSearchValue] = useState("");
-  const { setHighlighted } = useHierarchyContext();
+  const { setHighlighted, setExpandAll } = useHierarchyContext();
 
   function handleSearchOnClick() {
     const foundEmployees = searchEmployees(data, searchValue);
-    if (foundEmployees) {
+    if (foundEmployees && foundEmployees.length > 0) {
       setHighlighted(foundEmployees);
+      setExpandAll(true);
       return;
     }
+    setExpandAll(false);
     setHighlighted([]);
   }
 
