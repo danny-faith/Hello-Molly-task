@@ -3,7 +3,8 @@ import Typography from "@mui/joy/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { theme } from "../../theme";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useHierarchyContext } from "@/app/context/HierarchyContext";
 
 const activeStyle = {
   backgroundColor: `${theme.palette.primary.main} !important`,
@@ -41,13 +42,14 @@ const createSxValues = (
   cursor: "pointer",
   position: "relative",
   zIndex: 50,
+  outline: 0,
   borderTop: `3px solid ${theme.palette.primary.dark}`,
   "&:hover": {
     backgroundColor: theme.palette.primary.light,
   },
   ...(isHightlighted && highlightedStyle),
-  ...(isActive && activeStyle),
   ...(isCurrentNode && currentNodeStyle),
+  ...(isActive && activeStyle),
 });
 
 const Employee = ({
@@ -63,6 +65,8 @@ const Employee = ({
   onClick,
   isCurrentNode,
 }: Props) => {
+  const { setSelected } = useHierarchyContext();
+  const employeeRef = useRef<HTMLDivElement>(null);
   const [elevation, setElevation] = useState(1);
   const avatarIntial = name.length > 0 ? name.charAt(0) : "?";
   const sxValues = createSxValues(isHightlighted, isActive, isCurrentNode);
@@ -72,6 +76,13 @@ const Employee = ({
   } else if (!isActive && elevation !== 1) {
     setElevation(1);
   }
+
+  useEffect(() => {
+    if (isCurrentNode) {
+      const node = employeeRef.current;
+      node?.focus();
+    }
+  }, [isCurrentNode]);
 
   const classes = [];
   if (isHightlighted) {
@@ -94,6 +105,14 @@ const Employee = ({
     setElevation(1);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const { code } = e.nativeEvent;
+
+    if (code === "Enter") {
+      setSelected(id);
+    }
+  };
+
   return (
     <Paper
       elevation={elevation}
@@ -102,8 +121,11 @@ const Employee = ({
       className={classes.join("")}
       onMouseEnter={handlePaperMouseEnter}
       onMouseLeave={handlePaperMouseLeave}
+      onKeyDown={handleKeyDown}
+      ref={employeeRef}
+      tabIndex={-1}
     >
-      <Grid sx={{ mt: -2 }} container justifyContent="center">
+      <Grid ref={employeeRef} sx={{ mt: -2 }} container justifyContent="center">
         <Avatar
           sx={{ bgcolor: theme.palette.secondary.dark }}
           aria-label="Employee"
