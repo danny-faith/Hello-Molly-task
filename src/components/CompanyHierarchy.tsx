@@ -2,27 +2,37 @@
 import { Tree, TreeNode } from "react-organizational-chart";
 import { Employee } from "./Employee";
 import { useTheme } from "@mui/material/styles";
-import { useMediaQuery } from "@mui/material";
-import React from "react";
+import { Box, Button, useMediaQuery } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useHierarchyContext } from "@/app/context/HierarchyContext";
 
 const RenderTree = ({
   nodes,
   isVisible,
+  setExpandAll,
 }: {
   nodes: Employee;
   isVisible: boolean;
   setSelected: any;
+  expandAll: boolean;
+  setExpandAll: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [visible, setVisible] = React.useState<boolean>(isVisible || true);
-  const { selected, setSelected, highlighted } = useHierarchyContext();
-
+  const { selected, setSelected, highlighted, expandAll } =
+    useHierarchyContext();
   const treeNodeClass = visible ? "fadeInOpacity" : "fadeOutOpacity";
   const showCollapseButton = Array.isArray(nodes.children)
     ? nodes.children.length > 0
     : false;
   const isActive = nodes.id === selected ? true : false;
   const isHightlighted = highlighted.includes(nodes.id);
+
+  useEffect(() => {
+    if (expandAll) {
+      setExpandAll(false);
+      setVisible(true);
+    }
+  }, [expandAll, setExpandAll, visible]);
 
   return (
     <TreeNode
@@ -49,6 +59,8 @@ const RenderTree = ({
               nodes={node}
               isVisible={visible}
               setSelected={setSelected}
+              expandAll={expandAll}
+              setExpandAll={setExpandAll}
             />
           ))
         : null}
@@ -64,21 +76,33 @@ export default function CompanyHierarchy({
   data: IHierarchyData;
   setSelected: any;
 }) {
+  const { setExpandAll, expandAll } = useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.up("md"));
 
   if (!showComponent) return null;
 
+  function handleExpandAll() {
+    setExpandAll(true);
+  }
+
   return (
-    <Tree label="Meet the company">
-      {data.map((x) => (
-        <RenderTree
-          key={x.id}
-          nodes={x}
-          isVisible={true}
-          setSelected={setSelected}
-        />
-      ))}
-    </Tree>
+    <Box>
+      <Button variant="contained" onClick={handleExpandAll}>
+        Expand all
+      </Button>
+      <Tree label="Meet the company">
+        {data.map((x) => (
+          <RenderTree
+            key={x.id}
+            nodes={x}
+            isVisible={true}
+            setSelected={setSelected}
+            expandAll={expandAll}
+            setExpandAll={setExpandAll}
+          />
+        ))}
+      </Tree>
+    </Box>
   );
 }

@@ -50,8 +50,7 @@ const renderTree = (node: Employee, highlighted: string[]) => (
 );
 
 const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
-  const { expandAll, highlighted, setExpandAll, selected } =
-    useHierarchyContext();
+  const { expandAll, highlighted, setExpandAll } = useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.down("md"));
   const [expanded, setExpanded] = React.useState<string[]>([]);
@@ -62,7 +61,6 @@ const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
       setExpandAll(false);
     }
   }, [expandAll, setExpandAll]);
-  console.log("highlighted", highlighted);
 
   const handleToggle = (_event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
