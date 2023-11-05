@@ -6,7 +6,7 @@ const data: IHierarchyData = [
     id: "5555",
     children: [
       {
-        name: "Michael Davis",
+        name: "Michael Smith Davis",
         position: "CFO",
         email: "michael.davis@hellomolly.com.au",
         id: "5556",
@@ -26,7 +26,7 @@ const data: IHierarchyData = [
             children: [],
           },
           {
-            name: "Oliver Turner",
+            name: "Oliver William Turner",
             position: "Accounting Manager",
             email: "oliver.turner@hellomolly.com.au",
             id: "5559",
@@ -41,7 +41,7 @@ const data: IHierarchyData = [
         id: "5560",
         children: [
           {
-            name: "Emily Wilson",
+            name: "Emily Sarah Wilson",
             position: "VP of Operations",
             email: "emily.wilson@hellomolly.com.au",
             id: "5561",

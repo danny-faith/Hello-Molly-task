@@ -31,7 +31,18 @@ const TreeViewLabel = ({ name, position }: Employee) => {
 };
 
 const renderTree = (node: Employee, highlighted: string[]) => (
-  <TreeItem key={node.id} nodeId={node.id} label={TreeViewLabel(node)}>
+  <TreeItem
+    key={node.id}
+    nodeId={node.id}
+    sx={{
+      "& > div > div.MuiTreeItem-label": {
+        backgroundColor: highlighted.includes(node.id)
+          ? theme.palette.success.main
+          : "transparent",
+      },
+    }}
+    label={TreeViewLabel(node)}
+  >
     {Array.isArray(node.children)
       ? node.children.map((childNode) => renderTree(childNode, highlighted))
       : null}
@@ -39,7 +50,8 @@ const renderTree = (node: Employee, highlighted: string[]) => (
 );
 
 const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
-  const { expandAll, highlighted, setExpandAll } = useHierarchyContext();
+  const { expandAll, highlighted, setExpandAll, selected } =
+    useHierarchyContext();
   const theme = useTheme();
   const showComponent = useMediaQuery(theme.breakpoints.down("md"));
   const [expanded, setExpanded] = React.useState<string[]>([]);
@@ -50,8 +62,9 @@ const TreeViewWrapper = ({ data }: { data: IHierarchyData }) => {
       setExpandAll(false);
     }
   }, [expandAll, setExpandAll]);
+  console.log("highlighted", highlighted);
 
-  const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
+  const handleToggle = (_event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
   };
 
