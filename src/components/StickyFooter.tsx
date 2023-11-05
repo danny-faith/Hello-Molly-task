@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,6 +8,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Diversity2 from "@mui/icons-material/Diversity2";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { theme } from "../../theme";
 
 function Copyright() {
   return (
@@ -22,7 +24,7 @@ export default function StickyFooter() {
   return (
     <Box
       component="footer"
-      bgcolor="bisque"
+      bgcolor={theme.palette.primary.dark}
       sx={{
         mt: "auto",
       }}
