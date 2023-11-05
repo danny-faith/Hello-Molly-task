@@ -2,10 +2,11 @@
 import { Tree, TreeNode } from "react-organizational-chart";
 import { Employee } from "./Employee";
 import { useTheme } from "@mui/material/styles";
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, Button, Grid, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import { useHierarchyContext } from "@/app/context/HierarchyContext";
 import { navigationDirectionReducer } from "../../utils/utils";
+import { HierarchyNavigation } from "./HierarchyNavigation";
 
 // This component needs refactoring, too big
 const RenderTree = ({
@@ -108,22 +109,32 @@ export default function CompanyHierarchy({
 
   return (
     <Box tabIndex={-1} onKeyDown={handleKeyDown}>
-      <Button variant="contained" onClick={handleExpandAll}>
-        Expand all
-      </Button>
-      <Tree label="Meet the company">
-        {data.map((x) => (
-          <RenderTree
-            key={x.id}
-            nodes={x}
-            isVisible={true}
-            setSelected={setSelected}
-            expandAll={expandAll}
-            setExpandAll={setExpandAll}
-            currentNode={currentNode}
-          />
-        ))}
-      </Tree>
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Button sx={{ mb: 4 }} variant="contained" onClick={handleExpandAll}>
+            Expand all
+          </Button>
+        </Grid>
+      </Grid>
+      <HierarchyNavigation
+        data={data}
+        sx={{ display: { xs: "none", md: "flex" } }}
+      />
+      <Box mt={4}>
+        <Tree label="Meet the company">
+          {data.map((x) => (
+            <RenderTree
+              key={x.id}
+              nodes={x}
+              isVisible={true}
+              setSelected={setSelected}
+              expandAll={expandAll}
+              setExpandAll={setExpandAll}
+              currentNode={currentNode}
+            />
+          ))}
+        </Tree>
+      </Box>
     </Box>
   );
 }

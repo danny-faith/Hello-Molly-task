@@ -11,7 +11,6 @@ const CompanyHierarchy = dynamic(
 );
 import { TreeViewWrapper } from "@/components/TreeView";
 import { HierarchyProvider } from "./context/HierarchyContext";
-import { HierarchyNavigation } from "@/components/HierarchyNavigation";
 
 async function getHiearchyServerSide() {
   return hierarchy;
@@ -25,10 +24,6 @@ export default async function Home() {
       <HierarchyProvider data={hierarchy}>
         <Hero data={hierarchy} />
         <TreeViewWrapper data={hierarchy} />
-        <HierarchyNavigation
-          sx={{ display: { xs: "none", md: "flex" } }}
-          data={hierarchy}
-        />
         <Grid container justifyContent="center">
           <Grid md={12} item={true}>
             <Box py={5}>
